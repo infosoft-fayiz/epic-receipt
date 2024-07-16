@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-name="custom_receipt.OrderReceiptTotal"
+      t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('before-footer')]" position="before">
+           <t t-if="props.data.paymentlines[0].name == 'Customer Account'" >
+               <div style="text-align: center; padding-top: 10px"> Previous Account Balance: 
+                  <t t-out='props.formatCurrency(props.data.partner.credit)'/>
+               </div>
+               <div style="text-align: center;"> Account Balance: 
+                  <t t-out='props.formatCurrency(props.data.paymentlines[0].amount + props.data.partner.credit)'/>
+               </div>
+           </t>
+       </xpath>
+   </t>
+</templates>
